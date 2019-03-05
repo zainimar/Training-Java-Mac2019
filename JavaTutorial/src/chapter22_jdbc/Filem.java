@@ -20,6 +20,16 @@ public class Filem {
         //code berlaku dlam try, catch bila berlaku error 
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/sakila?useLegacyDatetimeCode=false&serverTimezone=America/New_York", "root","");
+            stmt = conn.createStatement();
+            String sql = "Select * From Film";
+            rs = stmt.executeQuery(sql);
+            
+            while(rs.next()){
+                int id = rs.getInt("film_id");
+                System.out.print(id + "\t");
+                System.out.print(rs.getString("title") + "\t\t");
+                System.out.println(rs.getString("description"));
+            }
         } 
         catch(Exception e) {
             System.out.println("Berlaku Error");
@@ -32,4 +42,7 @@ public class Filem {
         Filem f = new Filem();
         f.list();
     }
+    
+    //kalau nk buat table
+    //https://www.thoughtco.com/a-simple-table-example-java-code-program-2033892
 }
