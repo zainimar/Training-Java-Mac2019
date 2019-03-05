@@ -25,5 +25,6 @@ public class Book {
         Book b1 = new Book();
         Book b2 = new Book();
         Book.cetak();
+        //cetak(); bole juga dipanggil seperti ini sebab function main dan fuction cetak adalah static.
     }
 }
