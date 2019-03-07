@@ -1,3 +1,5 @@
+package model;
+
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -5,8 +7,8 @@ import java.sql.Statement;
 
 public class StudentModel extends Model
 {
-    int id;
-    String name;
+    public int id;
+    public String name;
     
     public StudentModel getOne(int studId){
         String sql = "Select * from film where film_id = " + studId;

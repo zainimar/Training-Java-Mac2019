@@ -1,4 +1,5 @@
 
+import model.StudentModel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -20,8 +21,11 @@ public class StudentController extends HttpServlet {
         
         //actual logic here
         PrintWriter out = response.getWriter();
-        String nama = request.getParameter("nama");
-        request.setAttribute("name", nama);
+        //String nama = request.getParameter("nama");
+        int studId = Integer.parseInt(request.getParameter("id"));
+        StudentModel stud = new StudentModel().getOne(studId);
+        request.setAttribute("stud", stud); // foward to JSP
+        
         //utk paparan di browser web( controller servlet comunicate dengan veiw -jsp)
         RequestDispatcher dispatch = request.getRequestDispatcher("student_details.jsp");
         dispatch.forward(request, response);

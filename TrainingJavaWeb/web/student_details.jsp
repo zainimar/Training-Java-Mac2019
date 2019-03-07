@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.StudentModel"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,8 +13,16 @@
         <title>Page View Student (Guna JSP)</title>
     </head>
     <body>
+        <% 
+        StudentModel stud = (StudentModel) request.getAttribute("stud");
+        out.print(stud.name);
+        out.print("<br>");
+        out.print(stud.id);
+        %>
         <h1>Student Details</h1>
-        Name : ${name}
-
+        Nama : <% out.print(stud.name); %>
+        <br>
+        ID : <% out.print(stud.id); %>
+       
     </body>
 </html>
