@@ -27,12 +27,23 @@ public class Login extends HttpServlet {
             //user wujud, set session then go to project list
             HttpSession sess = request.getSession();
             sess.setAttribute("loggedin", true);
+            sess.setAttribute("user", user); //simpan maklumat user dlm session cth: nama,role,jawatan
             response.sendRedirect("/ManagementSystem/projects");
             
         } else {
             //user tak wujud , go back to login page
             response.sendRedirect("/ManagementSystem/public/login.jsp?no");
         }
+    }
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        HttpSession session = request.getSession();
+        session.invalidate();//destroy masa logout
+        //untuk destroy session dan redirec
+        response.sendRedirect("/ManagementSystem/public/login.jsp");
+        
     }
 
     

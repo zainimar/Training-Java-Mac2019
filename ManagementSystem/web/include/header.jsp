@@ -1,12 +1,12 @@
-<%-- 
-    Document   : header
-    Created on : Mar 7, 2019, 10:50:01 AM
-    Author     : Pengguna PC 10
---%>
+
+<%@page import="models.Login_model"%>
 <%
 if (session.getAttribute("loggedin") == null){
     response.sendRedirect("/ManagementSystem/public/login.jsp");
+    return;
 }
+//casting
+Login_model user = (Login_model)session.getAttribute("user");
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,5 +18,11 @@ if (session.getAttribute("loggedin") == null){
     </head>
     <body>
         <h5>Header edit here..</h5>
+        <hr>
+        <div align="right">
+            <h6>Welcome <%= user.getName() %></h6> (<a href="/ManagementSystem/login?logout"> Log Out</a>)
+        </div>
+        <hr>
+        
 
 
