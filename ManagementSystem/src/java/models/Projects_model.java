@@ -9,6 +9,12 @@ public class Projects_model extends Model{
     private int id;
     private String title;
     private String description;
+    
+    //constructor utk initilize value
+    public Projects_model(){
+        this.title = "";
+        this.description = "";       
+    }
    
     public boolean insert(){
         String sql = "INSERT INTO project(title, description)" +
@@ -29,6 +35,25 @@ public class Projects_model extends Model{
     
     public boolean delete(int id){
         String sql = "DELETE FROM project WHERE id="+ id;
+        
+        try
+        {
+             Statement stmt = this.getStmt();
+             stmt.execute(sql);//insert update delete guna execute
+        }
+        catch (Exception e) 
+        {
+            e.printStackTrace(); // print err msg to console
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean update(int id){
+        String sql = "UPDATE project SET " 
+                    + "title = '" + this.title + "', "
+                    + "description = '" + this.description +"' "
+                    + "WHERE id = "+ id;
         
         try
         {
@@ -132,5 +157,38 @@ public class Projects_model extends Model{
         p.setTitle("test");
         p.setDescription("la..lal..aa");
         p.insert();
+    }
+
+    public ArrayList search(String title, String desc) {
+        ArrayList arr = new ArrayList();
+        
+        //run query search di sini
+        String sql = "select * from project where 1 ";
+        
+        if (! title.equals("")){
+            sql += "AND title LIKE '%" + title + "%' ";
+        }
+        
+        if (! desc.equals("")){
+            sql += "AND description LIKE '%" + desc + "%' ";
+        }
+        try
+        {
+             Statement stmt = this.getStmt();
+             ResultSet rs = stmt.executeQuery(sql);
+             while(rs.next()){
+                 Projects_model pro = new Projects_model();
+                 pro.id = rs.getInt("id");
+                 pro.title = rs.getString("title");
+                 pro.description = rs.getString("description");
+                 arr.add(pro);
+             }
+        }
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+        return arr;
+        
     }
 }

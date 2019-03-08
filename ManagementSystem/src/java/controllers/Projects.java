@@ -49,14 +49,46 @@ public class Projects extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
-        Projects_model pro = new Projects_model();
-        //bila variable private kena buat setter n getter code auto generate right klik
-        pro.setTitle(title);
-        pro.setDescription(description);
-        // untuk panggil function insert dlm model
-        pro.insert(); 
+        String search = request.getParameter("search");
+        if(search != null) {
+            //search
+            String title = request.getParameter("title");
+            String desc = request.getParameter("description");
+            
+            Projects_model pro = new Projects_model();
+            ArrayList list = pro.search(title,desc);
+            
+            request.setAttribute("list", list); //data yg dapat dipaparkan dalam form
+            request.getRequestDispatcher("projects/list_project.jsp").forward(request, response);
+        }
+        else
+        {
+            //insert update delete
+            String title = request.getParameter("title");
+            String description = request.getParameter("description");
+            String id = request.getParameter("id");
+
+            Projects_model pro = new Projects_model();
+
+            //bila variable private kena buat setter n getter code auto generate right klik
+            pro.setTitle(title);
+            pro.setDescription(description);
+
+            // untuk panggil function insert / edit dlm model checking id dlu id default "0"
+            if (id.equals("0")){
+                //insert
+                pro.insert();
+            }
+            else
+            {
+                //update
+                int id2 = Integer.parseInt(id);
+                pro.update(id2);
+            }
+        }
+        
+        
+         
         
         //teknik pertama untuk redirect slps proses insert berjaya ada bawa data(cth : id)
         //request.getRequestDispatcher("projects").forward(request, response);

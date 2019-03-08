@@ -3,7 +3,11 @@
     Created on : Mar 7, 2019, 10:50:01 AM
     Author     : Pengguna PC 10
 --%>
-
+<%
+if (session.getAttribute("loggedin") == null){
+    response.sendRedirect("/ManagementSystem/public/login.jsp");
+}
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

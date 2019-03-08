@@ -5,6 +5,19 @@
 
 <div><h2><strong>SENARAI PROJEK-PROJEK</strong></h2></div>
 
+<div class="col-md-2" align="left">
+      <a href="/ManagementSystem/projects/form.jsp" class="btn btn-primary btn-sm"> Add Project</a>
+</div>
+<form method="post" action="/ManagementSystem/projects">
+    <div class="form-row">
+        <div class="col-md-1" align="right">Title</div>
+        <div class="col-md-2" align="right"><input type="text" name="title" class="form-control-sm"></div>
+        <div class="col-md-1" align="right">Description</div>
+        <div class="col-md-2" align="right"><input type="text" name="description" class="form-control-sm"></div>
+        <div class="col-md-2" align="right"><input type="submit" name="search" class="btn btn-info btn-sm" value="Search"></div>
+    </div>
+</form>
+<br>
 <table class="table table-bordered table-hover ">
     <tr>
         <td>BIL</td>
